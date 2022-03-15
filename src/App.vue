@@ -1,32 +1,54 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <app-header>
+      <img src="~assets/img/CloudMusic2.png" alt="" />
+    </app-header>
+    <div class="app-bar">
+      <left-bar :barTitle="barTitle"></left-bar>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
     </div>
-    <router-view/>
+    <buttom-player></buttom-player>
   </div>
 </template>
 
+<script>
+import AppHeader from 'components/appheader/AppHeader.vue'
+import LeftBar from 'components/leftbar/LeftBar.vue'
+import ButtomPlayer from 'components/buttomplayer/ButtomPlayer.vue'
+export default {
+  data() {
+    return {
+      barTitle: [
+        {title: '发现音乐', path: '/discover'},
+        {title: '播客', path: '/podcast'},
+        {title: '视频', path: '/video'},
+        {title: '朋友', path: '/friend'},
+        {title: '直播', path: '/live'},
+        {title: '私人FM', path: '/fm'},
+      ]
+    }
+  },
+  components: {
+    AppHeader,
+    LeftBar,
+    ButtomPlayer
+  }
+}
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+@import url('./assets/css/normalize.css');
+@import url('./assets/css/base.css');
 
-#nav {
-  padding: 30px;
+.app-bar{
+  width: 100%;
+  height: calc(100vh - 60px - 70px - 1px);
+  display: flex;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.app-nav{
+  display: flex;
+  flex-direction: column;
 }
 </style>
